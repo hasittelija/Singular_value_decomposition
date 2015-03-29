@@ -3,7 +3,7 @@ library(shinyapps)
 library(RCurl)
 require(ggplot2); require(grid)
 
-source("sources/svd.R")
+#source("sources/svd.R")
 source("sources/geomareas_to_dataframe.R")
 source("sources/makeplot.R")
 
@@ -32,7 +32,7 @@ shinyServer(function(input, output) {
         mat_values <- matrix_values()
         shape_matrix <- shape_values()
         
-        toplot <- create_plot(mat_values, shape_matrix)
+        toplot <- transform_and_create_plot(mat_values, shape_matrix)
         
         return(toplot)
         

@@ -15,8 +15,8 @@ svd_tr <- svd(tr_matrix)
 circle <- get_circle(200)
 square <- get_square(200)
 
-keijo <- create_plot(svd_tr$u, circle)
-keijo <- create_plot(svd_tr$v, square)
+keijo <- transform_and_create_plot(svd_tr$u, circle)
+keijo <- transform_and_create_plot(svd_tr$v, square)
 
 plot(create_plot(matrix_values, circle))
 
