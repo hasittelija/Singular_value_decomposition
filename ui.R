@@ -31,9 +31,16 @@ shinyUI(fluidPage(
                             "Circle or Square",
                             choices = c("circle", "square")),
                
+               radioButtons("svd_part",
+                            "Plot full move, or SVD",
+                            choices = c(
+                                "Whole Transformation" = "full",
+                                "First part of SVD" = "svd_1",
+                                "First and Second of SVD" = "svd_2")),
+               
                p("Blue points are mapped to red points by the linear function defined by the chosen transformation matrix"),
                p("TODO apply singular value decomposition to the transformation matrix and plot all the mappings one by one")
-
+               
         ),
         
         # Show a plot of the generated distribution

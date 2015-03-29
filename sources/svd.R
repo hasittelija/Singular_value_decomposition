@@ -31,3 +31,5 @@ svd_tr$u %*% diag(svd_tr$d) %*% t(svd_tr$v)
 first2 <- diag(svd_tr$d) %*% t(svd_tr$v)
 
 plot(transform_and_create_plot(first2, circle))
+
+testi <- transform_matrixes(matrix_values, circle)
