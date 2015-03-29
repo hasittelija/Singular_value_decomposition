@@ -1,5 +1,9 @@
 create_plot <- function(matrix_values, circle_matrix, size = 5) {
-    tr_matrix <- matrix(matrix_values, nrow = 2, byrow = T)
+    if (class(matrix_values) == "matrix") {
+        tr_matrix <- matrix_values
+    } else {
+        tr_matrix <- matrix(matrix_values, nrow = 2, byrow = T)
+    }
     
     circle_transformed <- t(tr_matrix %*% t(circle_matrix))
     colnames(circle_transformed) <- c("x", "y")
