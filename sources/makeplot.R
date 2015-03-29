@@ -1,5 +1,6 @@
-
-create_plot <- function(tr_matrix, circle_matrix) {
+create_plot <- function(matrix_values, circle_matrix, size = 5) {
+    tr_matrix <- matrix(matrix_values, nrow = 2, byrow = T)
+    
     circle_transformed <- t(tr_matrix %*% t(circle_matrix))
     colnames(circle_transformed) <- c("x", "y")
     
@@ -23,7 +24,8 @@ create_plot <- function(tr_matrix, circle_matrix) {
     
     # fix axis and add Y/X axis lines:
     plotti <- plotti + scale_x_continuous(labels = lab, breaks = lab) + scale_y_continuous(labels = lab, breaks = lab) +
-        geom_hline() + geom_vline() + expand_limits(x = c(-size, size), y = c(-size, size)) + coord_fixed(ratio = 1)
+        geom_hline() + geom_vline() + expand_limits(x = c(-size, size), y = c(-size, size)) + coord_fixed(ratio = 1) +
+        xlab("X") + ylab("Y")
     
     return(plotti)
 }

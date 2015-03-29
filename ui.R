@@ -6,18 +6,37 @@ shinyUI(fluidPage(
     titlePanel("Singular Value Decomposition"),
     
     fluidRow(
-        column(2 ,
-               textInput("matrix_row2",
-                         "First Row:",
-                         value = "1, 2"),
-               textInput("matrix_row2",
-                         "Second Row:",
-                         value = "2, 1")
+        column(3 ,
+               h4("Input matrix:"),
+               
+               fluidRow(column(6 ,
+                               numericInput("matrix_1_1",
+                                            "[1,1]",
+                                            value = 1.5)),
+                        column(6,
+                               numericInput("matrix_1_2",
+                                            "[1,2]",
+                                            value = 2))
+               ),
+               fluidRow(column(6 ,
+                               numericInput("matrix_2_1",
+                                            "[2,1]",
+                                            value = 1)),
+                        column(6,
+                               numericInput("matrix_2_2",
+                                            "[2,2]",
+                                            value = 3))
+               ),
+               radioButtons("shape",
+                            "Circle or Square",
+                            choices = c("circle", "square"))
+
         ),
         
         # Show a plot of the generated distribution
-        column(10 ,
+        column(9 ,
                plotOutput("distPlot")
+               
         )
     )
 ))
