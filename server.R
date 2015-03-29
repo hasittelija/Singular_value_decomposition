@@ -1,6 +1,12 @@
 library(shiny)
-#library(shinyapp)
+library(shinyapps)
+library(RCurl)
+require(ggplot2); require(grid)
+
+source("sources/svd.R")
 source("sources/geomareas_to_dataframe.R")
+source("sources/makeplot.R")
+
 
 shinyServer(function(input, output) {
     
@@ -15,9 +21,9 @@ shinyServer(function(input, output) {
     shape_values <- reactive({
         keijo <-  input$shape
         if (input$shape == "circle") {
-            return(get_circle(100))
+            return(get_circle(200))
         } else if (input$shape == "square") {
-            return(get_square(100))
+            return(get_square(200))
         }
     })
 
