@@ -10,13 +10,24 @@ matrix_values <- c(4,2,3,1)
 
 tr_matrix <- matrix(matrix_values, nrow = 2, byrow = T)
 
+# tr_matrix <- matrix(c(1,0,0,0,2,
+#                       0,0,3,0,0,
+#                       0,0,0,0,0,
+#                       0,4,0,0,0), nrow = 4, byrow = T)
+
 svd_tr <- svd(tr_matrix)
 
 circle <- get_circle(200)
 square <- get_square(200)
 
-keijo <- transform_and_create_plot(svd_tr$u, circle)
-keijo <- transform_and_create_plot(svd_tr$v, square)
+plot(transform_and_create_plot(svd_tr$u, circle))
+plot(transform_and_create_plot(svd_tr$v, circle))
+plot(transform_and_create_plot(diag(svd_tr$d), circle))
 
-plot(create_plot(matrix_values, circle))
+plot(transform_and_create_plot(matrix_values, circle))
 
+svd_tr$u %*% diag(svd_tr$d) %*% t(svd_tr$v)
+
+first2 <- diag(svd_tr$d) %*% t(svd_tr$v)
+
+plot(transform_and_create_plot(first2, circle))
