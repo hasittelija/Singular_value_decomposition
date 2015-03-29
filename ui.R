@@ -35,7 +35,7 @@ shinyUI(fluidPage(
         
         # Show a plot of the generated distribution
         column(9 ,
-               plotOutput("distPlot")
+               plotOutput("distPlot", height = 700)
                
         )
     )

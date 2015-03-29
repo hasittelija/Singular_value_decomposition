@@ -1,4 +1,5 @@
 library(shiny)
+#library(shinyapp)
 source("sources/geomareas_to_dataframe.R")
 
 shinyServer(function(input, output) {
@@ -19,8 +20,7 @@ shinyServer(function(input, output) {
             return(get_square(100))
         }
     })
-    
-    
+
     
     output$distPlot <- renderPlot({
         mat_values <- matrix_values()
