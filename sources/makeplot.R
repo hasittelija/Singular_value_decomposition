@@ -16,8 +16,8 @@ create_plot <- function(matrix_values, circle_matrix, size = 5) {
     
     plotti <- ggplot(dfr, aes(x = x_end, y = y_end)) + geom_point(size = 5, color = "red") +
         geom_point(aes(x = x_start, y = y_start), color = "blue", size = 5) +
-        geom_point(data = data.frame(circle_matrix), aes(x = x_locs, y = y_locs), color = "blue", size = 0.5) +
-        geom_point(data = data.frame(circle_transformed), aes(x = x, y = y), color = "red", size = 0.5)
+        geom_point(data = data.frame(circle_matrix), aes(x = x_locs, y = y_locs), color = "blue", size = 1) +
+        geom_point(data = data.frame(circle_transformed), aes(x = x, y = y), color = "red", size = 1)
     
     # draw line for transform:
     plotti <- plotti + geom_segment(aes(x=x_start, y=y_start, xend=x_end, yend=y_end), arrow=arrow(), size=1, color="black", alpha = 0.5) 

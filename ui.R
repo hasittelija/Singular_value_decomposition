@@ -7,7 +7,7 @@ shinyUI(fluidPage(
     
     fluidRow(
         column(3 ,
-               h4("Input matrix:"),
+               h4("Transformation matrix:"),
                
                fluidRow(column(6 ,
                                numericInput("matrix_1_1",
@@ -29,7 +29,10 @@ shinyUI(fluidPage(
                ),
                radioButtons("shape",
                             "Circle or Square",
-                            choices = c("circle", "square"))
+                            choices = c("circle", "square")),
+               
+               p("Blue points are mapped to red points by the linear function defined by the chosen transformation matrix"),
+               p("TODO apply singular value decomposition to the transformation matrix and plot all the mappings one by one")
 
         ),
         
