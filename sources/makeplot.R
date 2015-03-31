@@ -1,30 +1,36 @@
 transform_and_create_plot <- function(matrix_values, shape_matrix, size = 5, ...) {
 
-    matrix_list <- transform_matrixes(matrix_values, shape_matrix, ...)
+    matrix_list <- transform_matrixes_and_make_list(matrix_values, shape_matrix, ...)
 
     gridsize <- seq(-size, size)
     create_only_plot(matrix_list$point_before, matrix_list$point_after, 
                      matrix_list$shape_before, matrix_list$shape_after, gridsize)
 }
 
-transform_matrixes <- function(transform_matrix, shape_matrix, point_matrix = NULL) {
-    if (class(transform_matrix) == "matrix") {
-        tr_matrix <- transform_matrix
+
+
+transform_matrix <- function(transformation_matrix, points_matrix) {
+    if (class(transformation_matrix) == "matrix") {
+        tr_matrix <- transformation_matrix
     } else {
-        tr_matrix <- matrix(transform_matrix, nrow = 2, byrow = T)
+        tr_matrix <- matrix(transformation_matrix, nrow = 2, byrow = T)
     }
-    
-    shape_matrix_transformed <- t(tr_matrix %*% t(shape_matrix))
-    colnames(shape_matrix_transformed) <- c("x", "y")
-    
-    if (is.null(point_matrix)) {
+    if (is.null(points_matrix)) {
         point_matrix <- diag(2)
     }
+    point_matrix_transformed <- t(tr_matrix %*% t(points_matrix))
+    return(point_matrix_transformed)
+}
+
+
+transform_matrixes_and_make_list <- function(transformation_matrix, shape_matrix, point_matrix = diag(2)) {
+    shape_matrix_transformed <- transform_matrix(transformation_matrix, shape_matrix)
+    colnames(shape_matrix_transformed) <- c("x", "y")
+    
+    point_matrix_transformed <- transform_matrix(transformation_matrix, point_matrix)
+    colnames(point_matrix_transformed) <- c("x_end", "y_end")
     
     colnames(point_matrix) <- c("x_start", "y_start")
-    
-    point_matrix_transformed <- t(tr_matrix %*% t(point_matrix))
-    colnames(point_matrix_transformed) <- c("x_end", "y_end")
     
     return(list("shape_before" = shape_matrix, 
                 "shape_after" = shape_matrix_transformed, 
@@ -49,7 +55,7 @@ create_only_plot <- function(start_point_matrix, end_point_matrix, shape_matrix,
     # fix axis and add Y/X axis lines:
     plotti <- plotti + scale_x_continuous(labels = gridsize, breaks = gridsize) + scale_y_continuous(labels = gridsize, breaks = gridsize) +
         geom_hline() + geom_vline() + expand_limits(x = c(-gridsize, gridsize), y = c(-gridsize, gridsize)) + coord_fixed(ratio = 1) +
-        xlab("X") + ylab("Y")
+        xlab("") + ylab("")
     
     return(plotti)
 }
