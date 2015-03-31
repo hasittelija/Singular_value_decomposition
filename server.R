@@ -7,6 +7,7 @@ source("sources/svd.R")
 source("sources/geomareas_to_dataframe.R")
 source("sources/makeplot.R")
 
+PALETTE <- c("#1b9e77", "#d95f02", "#7570b3", "#e7298a")
 
 shinyServer(function(input, output) {
     
@@ -34,10 +35,15 @@ shinyServer(function(input, output) {
         
         end_matrix <- perform_svd(matrix_values(), end_value)
         start_matrix <- perform_svd(matrix_values(), start_value)
-        
+
         shape_matrix <- shape_values()
-            
-        toplot <- transform_and_create_plot(start_matrix, end_matrix, diag(2), shape_matrix)
+
+        start_col <- PALETTE[as.numeric(start_value) + 1]
+        end_col <- PALETTE[as.numeric(end_value) + 1] 
+        
+
+        toplot <- transform_and_create_plot(start_matrix, end_matrix, diag(2), shape_matrix, 
+                                            startcolor = start_col, endcolor = end_col)
         
         return(toplot)
         
