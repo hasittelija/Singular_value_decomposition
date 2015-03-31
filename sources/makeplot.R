@@ -1,6 +1,13 @@
-transform_and_create_plot <- function(matrix_values, shape_matrix, size = 5, ...) {
-
-    matrix_list <- transform_matrixes_and_make_list(matrix_values, shape_matrix, ...)
+transform_and_create_plot <- function(start_matrix, end_matrix, point_matrix, shape_matrix, size = 5, ...) {
+    if (!is.null(start_matrix)) {
+        point_matrix <- transform_matrix(start_matrix, point_matrix)
+        shape_matrix <- transform_matrix(start_matrix, shape_matrix)
+    }
+    
+    point_matrix_transformed <- transform_matrix(end_matrix, point_matrix)
+    shape_matrix_transformed <- transform_matrix(end_matrix, shape_matrix)
+    
+    matrix_list <- name_columns(point_matrix, point_matrix_transformed, shape_matrix, shape_matrix_transformed)
 
     gridsize <- seq(-size, size)
     create_only_plot(matrix_list$point_before, matrix_list$point_after, 
@@ -8,7 +15,7 @@ transform_and_create_plot <- function(matrix_values, shape_matrix, size = 5, ...
 }
 
 
-
+# Apply linear mapping given by transformation matrix to points matrix
 transform_matrix <- function(transformation_matrix, points_matrix) {
     if (class(transformation_matrix) == "matrix") {
         tr_matrix <- transformation_matrix
@@ -23,13 +30,11 @@ transform_matrix <- function(transformation_matrix, points_matrix) {
 }
 
 
-transform_matrixes_and_make_list <- function(transformation_matrix, shape_matrix, point_matrix = diag(2)) {
-    shape_matrix_transformed <- transform_matrix(transformation_matrix, shape_matrix)
+name_columns <- function(point_matrix, point_matrix_transformed, shape_matrix, shape_matrix_transformed) {
     colnames(shape_matrix_transformed) <- c("x", "y")
+    colnames(shape_matrix) <- c("x_locs", "y_locs")
     
-    point_matrix_transformed <- transform_matrix(transformation_matrix, point_matrix)
     colnames(point_matrix_transformed) <- c("x_end", "y_end")
-    
     colnames(point_matrix) <- c("x_start", "y_start")
     
     return(list("shape_before" = shape_matrix, 

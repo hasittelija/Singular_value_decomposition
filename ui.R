@@ -33,10 +33,11 @@ shinyUI(fluidPage(
                radioButtons("svd_part",
                             "Plot full move, or SVD",
                             choices = c(
-                                "Whole Transformation" = 0,
-                                "First part of SVD" = 1,
-                                "First and Second of SVD" = 2),
-                            selected = 0),
+                                "Whole Transformation" = "0to3",
+                                "First part of SVD" = "0to1",
+                                "Second part of SVD" = "0to2",
+                                "From First to Second" = "1to2"),
+                            selected = "0to3"),
                
                p("Blue points are mapped to red points by the linear function defined by the chosen transformation matrix"),
                p("TODO apply singular value decomposition to the transformation matrix and plot all the mappings one by one")

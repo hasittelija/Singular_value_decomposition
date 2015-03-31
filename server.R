@@ -29,13 +29,15 @@ shinyServer(function(input, output) {
 
     
     output$distPlot <- renderPlot({
-        mat_values <- matrix_values()
+        start_value <- substr(input$svd_part, 1, 1)
+        end_value <- substr(input$svd_part, 4, 4)
+        
+        end_matrix <- perform_svd(matrix_values(), end_value)
+        start_matrix <- perform_svd(matrix_values(), start_value)
         
         shape_matrix <- shape_values()
-        
-        mat_values <- perform_svd(mat_values, input$svd_part)
-        
-        toplot <- transform_and_create_plot(mat_values, shape_matrix)
+            
+        toplot <- transform_and_create_plot(start_matrix, end_matrix, diag(2), shape_matrix)
         
         return(toplot)
         
