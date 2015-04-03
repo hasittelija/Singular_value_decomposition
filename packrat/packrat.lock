@@ -56,6 +56,11 @@ Source: CRAN
 Version: 0.6.8
 Hash: 89dc4c8734dad5322bb3c5c2af09056f
 
+Package: expm
+Source: CRAN
+Version: 0.99-1.1
+Hash: 60b5bec869647c00d80f530fa907c7ee
+
 Package: ggplot2
 Source: CRAN
 Version: 1.0.1

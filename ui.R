@@ -11,21 +11,35 @@ shinyUI(fluidPage(
                fluidRow(column(6 ,
                                numericInput("matrix_1_1",
                                             "[1,1]",
-                                            value = 2)),
+                                            value = 1)),
                         column(6,
                                numericInput("matrix_1_2",
                                             "[1,2]",
                                             value = 1))
                ),
-               fluidRow(column(6 ,
+               fluidRow(column(6,
                                numericInput("matrix_2_1",
                                             "[2,1]",
                                             value = 1)),
                         column(6,
                                numericInput("matrix_2_2",
                                             "[2,2]",
-                                            value = 3))
+                                            value = 0))
                ),
+               
+               fluidRow(column(6,
+                               numericInput("exponent_by", "Exponent",
+                                            value = 1)),
+                        column(6,
+                               numericInput("gridSize", "Grid size",
+                                            value = 10))                           
+                               
+               ),
+               
+               
+               tableOutput("trans_matrix"),
+               
+               
                radioButtons("shape",
                             "Circle or Square",
                             choices = c("circle", "square")),
