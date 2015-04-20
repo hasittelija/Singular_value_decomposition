@@ -35,7 +35,6 @@ shinyServer(function(input, output) {
     
     output$trans_matrix <- renderTable({
         matrix_values() # to make this reactive
-        print(trans_matrix)
         return(trans_matrix)
     })
     
@@ -50,7 +49,6 @@ shinyServer(function(input, output) {
 
         start_col <- PALETTE[as.numeric(start_value) + 1]
         end_col <- PALETTE[as.numeric(end_value) + 1] 
-        
 
         toplot <- transform_and_create_plot(start_matrix, end_matrix, diag(2), shape_matrix, 
                                             startcolor = start_col, endcolor = end_col, size = input$gridSize)
